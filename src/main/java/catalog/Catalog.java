@@ -55,6 +55,19 @@ public class Catalog implements Serializable {
         throw new invalidNameException(new Exception());
     }
 
+    public void view(Item item) {
+        try{
+            if(item instanceof media.Image) {
+                ((Image) item).load();
+            } else if(item instanceof Movie) {
+                ((Movie) item).load();
+            }
+        }
+        catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addItem(Item newItem) {
         items.add(newItem);
     }

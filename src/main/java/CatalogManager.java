@@ -36,6 +36,6 @@ public class CatalogManager {
         catalog.play();
 
         //This will load a single item
-        CatalogUtil.view(catalog.searchByName("musashi") );
+        catalog.view(catalog.searchByName("musashi") );
     }
 }

@@ -1,7 +1,9 @@
 package catalog;
 
 import exceptions.invalidCatalogException;
+import media.Image;
 import media.Item;
+import media.Movie;
 
 import java.awt.*;
 import java.io.*;
@@ -23,24 +25,9 @@ public class CatalogUtil {
             throw new invalidCatalogException( new Exception() );
         }
 
-
         try (var ois = new ObjectInputStream(
                 new FileInputStream( path ))){
                 return (Catalog) ois.readObject();
         }
-
     }
-
-    public static void view(Item item) {
-        Desktop desktop = Desktop.getDesktop();
-        URI uri = null;
-        try{
-            uri = new URI(item.getPath());
-            desktop.browse(uri);
-        }
-        catch (URISyntaxException | IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
