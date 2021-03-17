@@ -1,15 +1,12 @@
 package catalog;
 
-import exceptions.invalidNameException;
+import exceptions.InvalidNameException;
 import media.Image;
 import media.Item;
 import media.Movie;
 
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +37,17 @@ public class Catalog implements Serializable {
             }
         });
     }
-    public Item searchByName(String nameToFind) throws invalidNameException {
+
+    public void list() {
+        if(items.size() == 0) {
+            throw new IllegalArgumentException("ItemList should not be empty.");
+        }
+        items.forEach(iteratedItem -> {
+            System.out.println(iteratedItem.toString());
+        });
+    }
+
+    public Item searchByName(String nameToFind) throws InvalidNameException {
         for (Item i : items) {
             if (i.getName().equals(nameToFind)) {
                 return i;
@@ -52,7 +59,7 @@ public class Catalog implements Serializable {
             }
         });*/ // error???
         // We throw the exception if we don't find the name we were looking for
-        throw new invalidNameException(new Exception());
+        throw new InvalidNameException(new Exception());
     }
 
     public void view(Item item) {

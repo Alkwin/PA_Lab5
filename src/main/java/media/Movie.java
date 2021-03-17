@@ -21,4 +21,12 @@ public class Movie extends Item {
         uri = new URI(this.getPath());
         desktop.browse(uri);;
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "releaseDate='" + releaseDate + "' " +
+                super.toString() +
+                '}';
+    }
 }

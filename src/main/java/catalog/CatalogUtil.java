@@ -1,14 +1,8 @@
 package catalog;
 
-import exceptions.invalidCatalogException;
-import media.Image;
-import media.Item;
-import media.Movie;
+import exceptions.InvalidCatalogException;
 
-import java.awt.*;
 import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 public class CatalogUtil {
 
@@ -19,10 +13,10 @@ public class CatalogUtil {
         }
     }
 
-    public static Catalog load(String path) throws invalidCatalogException, IOException, ClassNotFoundException {
+    public static Catalog load(String path) throws InvalidCatalogException, IOException, ClassNotFoundException {
         File f = new File(path);
         if(!f.exists() || f.isDirectory()) {
-            throw new invalidCatalogException( new Exception() );
+            throw new InvalidCatalogException( new Exception() );
         }
 
         try (var ois = new ObjectInputStream(

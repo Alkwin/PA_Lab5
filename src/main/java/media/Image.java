@@ -20,4 +20,5 @@ public class Image extends Item {
         File f = new File(this.getPath());
         desktop.browse(f.toURI());
     }
+
 }

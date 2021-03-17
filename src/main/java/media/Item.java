@@ -26,4 +26,12 @@ public class Item implements Serializable {
     public void setPath(String path) {
         this.path = path;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", path='" + path + '\'' +
+                '}';
+    }
 }

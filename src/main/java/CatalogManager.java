@@ -1,9 +1,10 @@
 import catalog.Catalog;
 import catalog.CatalogUtil;
-import exceptions.invalidCatalogException;
-import exceptions.invalidNameException;
+import exceptions.InvalidCatalogException;
+import exceptions.InvalidNameException;
 import media.Image;
 import media.Movie;
+import shell.ShellManager;
 
 import java.io.IOException;
 
@@ -14,10 +15,16 @@ public class CatalogManager {
     public void startProgram() {
         try {
             initializeCatalog();
-            viewCatalog();
+            //viewCatalog();
+            shell();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void shell() {
+        ShellManager sh = new ShellManager();
+        sh.initializeShell();
     }
 
     public void initializeCatalog() throws IOException {
@@ -29,13 +36,15 @@ public class CatalogManager {
 
         CatalogUtil.save(catalog);
     }
-    public void viewCatalog() throws invalidNameException, invalidCatalogException, IOException, ClassNotFoundException {
-        Catalog catalog = CatalogUtil.load("media/catalog.ser");
+    public void viewCatalog() throws InvalidNameException, InvalidCatalogException, IOException, ClassNotFoundException {
+        Catalog catalog = CatalogUtil.load(catalogPath);
 
         //This will load all the catalog
         catalog.play();
 
         //This will load a single item
         catalog.view(catalog.searchByName("musashi") );
+
+        catalog.list();
     }
 }
