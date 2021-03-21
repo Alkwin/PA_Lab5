@@ -1,0 +1,1 @@
+java -jar PA_Lab5.jar

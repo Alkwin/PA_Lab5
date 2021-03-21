@@ -4,6 +4,7 @@ import catalog.Catalog;
 import catalog.CatalogUtil;
 import exceptions.CommandLineException;
 import exceptions.InvalidCatalogException;
+import freemarker.template.TemplateException;
 import media.Image;
 import media.Movie;
 import shell.commands.*;
@@ -65,16 +66,17 @@ public class ShellManager {
         ListCommand lic = new ListCommand();
         SaveCommand sc = new SaveCommand();
         PlayCommand pc = new PlayCommand();
+        ReportCommand rc = new ReportCommand();
 
         availableCommands.add(ac);
         availableCommands.add(loc);
         availableCommands.add(lic);
         availableCommands.add(sc);
         availableCommands.add(pc);
+        availableCommands.add(rc);
     }
 
     private void displayOptionalText() {
-        //TODO
         //printMessageNewLine("For more information, type <command> --help");
     }
 
@@ -103,8 +105,8 @@ public class ShellManager {
                 startQueryingForCommands(catalog);
             }
         } catch (CommandLineException e) {
-            printMessageNewLine("Command line exception caught!");
-            e.printStackTrace();
+            printMessageNewLine("Unavailable command!");
+            startQueryingForCommands(catalog);
         }
     }
 
@@ -175,6 +177,15 @@ public class ShellManager {
                         try {
                             loc.loadCommand("media/catalog.ser");
                         } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return true;
+                    }
+                    case "report" -> {
+                        ReportCommand rc = new ReportCommand();
+                        try {
+                            rc.executeReportCommand(catalog);
+                        } catch (IOException | TemplateException e) {
                             e.printStackTrace();
                         }
                         return true;
